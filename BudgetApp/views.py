@@ -1,38 +1,35 @@
 from django.shortcuts import render, redirect
-from .models import Payments, Income
+from .models import Payment, Income
 from .forms import PaymentForm, IncomeForm
 
 
 def home(request):
-    forums = forum.objects.all()
-    count = forums.count()
-    discussions = []
-    for i in forums:
-        discussions.append(i.discussion_set.all())
+    payments = Payment.objects.all()
+    listofpayments = []
+    for i in payments:
+        listofpayments.append(i.listofpayments_set.all())
 
-    context = {'forums': forums,
-               'count': count,
-               'discussions': discussions}
+    context = {'payments': payments, 'listofpayments': listofpayments}
     return render(request, 'home.html', context)
 
 
-def addInForum(request):
-    form = CreateInForum()
+def addPayments(request):
+    form = PaymentForm()
     if request.method == 'POST':
-        form = CreateInForum(request.POST)
+        form = PaymentForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/')
     context = {'form': form}
-    return render(request, 'addInForum.html', context)
+    return render(request, 'BudgetApp/addPayments.html', context)
 
 
-def addInDiscussion(request):
-    form = CreateInDiscussion()
+def addExpense(request):
+    form = IncomeForm()
     if request.method == 'POST':
-        form = CreateInDiscussion(request.POST)
+        form = IncomeForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/')
     context = {'form': form}
-    return render(request, 'addInDiscussion.html', context)
+    return render(request, 'BudgetApp/addExpense.html', context)
