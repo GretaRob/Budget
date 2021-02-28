@@ -3,7 +3,7 @@ from django.db import models
 # what have you spent
 
 
-class Payments(models.Model):
+class Payment(models.Model):
     payment_name = models.CharField(max_length=200, blank=True)
     date_added = models.DateTimeField()
     cost = models.FloatField()
