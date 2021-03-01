@@ -9,7 +9,13 @@ def home(request):
     for i in payments:
         listofpayments.append(i.listofpayments_set.all())
 
-    context = {'payments': payments, 'listofpayments': listofpayments}
+    income = Income.objects.all()
+    listofincome = []
+    for i in income:
+        listofincome.append(i.listofincome_set.all())
+
+    context = {'payments': payments, 'listofpayments': listofpayments,
+               'income': income, 'listofincome': listofincome}
     return render(request, 'home.html', context)
 
 
