@@ -53,6 +53,12 @@ def addIncome(request):
     return render(request, 'BudgetApp/addIncome.html', context)
 
 
+def removePayment(request, payment_id):
+    paymenttodelete = Payment.objects.get(id=payment_id)
+    paymenttodelete.delete()
+    return redirect('/')
+
+
 def pie_plot(request):
 
     # a donut plot showing the spendings per month
@@ -64,19 +70,21 @@ def pie_plot(request):
     # equal aspect ratio ensures that pie is drawn as a circle.
     ax = fig.add_subplot(111, aspect='equal')
 
-    labels = []
-    wedges = []
+    wedges = [Payment.objects.filter(category='rent').aggregate(suma=Sum('cost'))['suma'] or 0.00,
+              Payment.objects.filter(category='grocery').aggregate(
+                  suma=Sum('cost'))['suma'] or 0.00,
+              Payment.objects.filter(category='shopping').aggregate(
+                  suma=Sum('cost'))['suma'] or 0.00,
+              Payment.objects.filter(category='gym').aggregate(
+                  suma=Sum('cost'))['suma'] or 0.00,
+              Payment.objects.filter(category='phone').aggregate(
+                  suma=Sum('cost'))['suma'] or 0.00,
+              Payment.objects.filter(category='freetime').aggregate(
+                  suma=Sum('cost'))['suma'] or 0.00,
+              Payment.objects.filter(category='other').aggregate(suma=Sum('cost'))['suma'] or 0.00]
 
-    for month in range(1, 13):
-        labels.append(month)
-        wedges.append(Payment.objects.filter(date_added__month=month).aggregate(
-            suma=Sum('cost'))['suma'] or 0.00)
-
-    new_labels = []
-    for i in range(1, 13):
-        month_name = calendar.month_name[i]
-        new_labels.append(
-            When(some_datetime_field__month=i, then=Value(month_name)))
+    labels = ['rent', 'groceries', 'shopping',
+              'gym', 'phone', 'freetime', 'other']
 
     def my_autopct(pct):
         return ('%1.1f%%' % pct) if pct > 0.0 else ''
@@ -87,9 +95,9 @@ def pie_plot(request):
            shadow=False,
            autopct=my_autopct,
            pctdistance=0.55)
-    ax.legend(wedges, labels=new_labels, title='months',
+    ax.legend(wedges, labels=labels, title='Categories',
               loc='center left', bbox_to_anchor=(0.96, 0, 0.5, 1))
-    fig.suptitle('Your spending statistics per month', fontsize=20)
+    fig.suptitle('Your spending statistics', fontsize=20)
 
     # draw inner circle for donut chart
     centre_circle = plt.Circle((0, 0), 0.70, fc='white')
