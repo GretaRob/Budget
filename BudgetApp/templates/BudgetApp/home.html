@@ -16,6 +16,7 @@
 <body>
     <h2 class="jumbotron">
          Balance: {{leftmoney}}
+         <img style='float:right; padding-right:50px;' src="/pie_plot/" height="350px"/>
         <form method="POST" action="{% url 'addPayments' %}">
             {% csrf_token %}
         <button class="btn btn-success" style="width:fit-content; padding: 4px; margin:10px;">Add Expense</button>
