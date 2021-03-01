@@ -1,5 +1,16 @@
 from django.db import models
 
+
+CHOICES = (
+    ('rent', 'Rent'),
+    ('groceries', 'Groceries'),
+    ('shopping', 'Shopping'),
+    ('gym', 'Gym'),
+    ('phone', 'Phone'),
+    ('freetime', 'Freetime'),
+    ('other', 'Other')
+)
+
 # what have you spent
 
 
@@ -7,6 +18,7 @@ class Payment(models.Model):
     payment_name = models.CharField(max_length=200, blank=True)
     date_added = models.DateTimeField()
     cost = models.FloatField()
+    category = models.CharField(max_length=25, choices=CHOICES)
 
     def __str__(self):
         return str(self.payment_name)
