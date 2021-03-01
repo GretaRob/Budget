@@ -7,16 +7,16 @@ def home(request):
     payments = Payment.objects.all()
     listofpayments = []
     for i in payments:
-        listofpayments.append(i.listofpayments_set.all())
+        listofpayments.append(i)
 
-    income = Income.objects.all()
+    allincome = Income.objects.all()
     listofincome = []
-    for i in income:
-        listofincome.append(i.listofincome_set.all())
+    for i in allincome:
+        listofincome.append(i)
 
     context = {'payments': payments, 'listofpayments': listofpayments,
-               'income': income, 'listofincome': listofincome}
-    return render(request, 'home.html', context)
+               'allincome': allincome, 'listofincome': listofincome, }
+    return render(request, 'BudgetApp/home.html', context)
 
 
 def addPayments(request):
@@ -30,7 +30,7 @@ def addPayments(request):
     return render(request, 'BudgetApp/addPayments.html', context)
 
 
-def addExpense(request):
+def addIncome(request):
     form = IncomeForm()
     if request.method == 'POST':
         form = IncomeForm(request.POST)
@@ -38,4 +38,4 @@ def addExpense(request):
             form.save()
             return redirect('/')
     context = {'form': form}
-    return render(request, 'BudgetApp/addExpense.html', context)
+    return render(request, 'BudgetApp/addIncome.html', context)

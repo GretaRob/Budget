@@ -14,38 +14,58 @@
     </style>
 </head>
 <body>
-        <h2 class="jumbotron">
-            Balance: {{income-payments}}
-            <form method="POST" action="{% url 'addPayments' %}">
-                {% csrf_token %}
-            <button class="btn btn-success" style="width:fit-content; padding: 4px; margin:10px;">Add more</button>
-            </form>
-        </h2>
-            <div class="card-columns" style="padding: 10px; margin: 20px;"></div>
+    <h2 class="jumbotron">
+         Balance: {{payment.cost}}
+        <form method="POST" action="{% url 'addPayments' %}">
+            {% csrf_token %}
+        <button class="btn btn-success" style="width:fit-content; padding: 4px; margin:10px;">Add Expense</button>
+        </form>
+        <form method="POST" action="{% url 'addIncome' %}">
+            {% csrf_token %}
+        <button class="btn btn-success" style="width:fit-content; padding: 4px; margin:10px;">Add Income</button>
+        </form>
+    </h2>
+    <div class="card-columns" style="padding: 10px; margin: 20px;"></div>     
             
+    {%for payment in payments %}
             
-            {%for payment in payments %}
-            
-                <div class="card box container">
-                    <br>
-                    <h5 class="card-title">
-                        <a href='{{payment.link}}'><h3>{{payment.title}}</h3></a> 
-                        <div class="card-body container">
-                                <p>{{Payment.date-added}}</p>
-                            </h5>
-                            <hr>
-                            <p> Cost: {{payment.cost}}</p>
-                            <hr>     
-                            <form method="POST" action="{% url 'addIncome' %}">
-                                {% csrf_token %}
-                            <button class="btn btn-success" style="width:fit-content; padding: 4px; margin:10px;">Add more</button>
-                            </form>
-                        </div>
-                </div>
-            </div>
+        <div class="card box container">
             <br>
+            <h5 class="card-title">
+                <a href='{{payment.link}}'><h3>{{payment.payment_name}}</h3></a> 
+                <div class="card-body container">
+                        <p>{{payment.date_added}}</p>
+                    </h5>
+                    <hr>
+                    <p> Cost: {{payment.cost}}</p>
+                    <hr>     
+                </div>
+        </div>
+    </div>
+    <br>
             
-            {%endfor%}
+    {%endfor%}
+        
+    <div class="card-columns" style="padding: 10px; margin: 20px;"></div>     
+            
+    {%for income in allincome %}
+            
+        <div class="card box container">
+            <br>
+            <h5 class="card-title">
+                <a href='{{income.link}}'><h3>{{income.income_name}}</h3></a> 
+                <div class="card-body container">
+                        <p>{{income.date_added}}</p>
+                    </h5>
+                    <hr>
+                    <p> Amount: {{income.amount}}</p>
+                    <hr>     
+                </div>
+        </div>
+    </div>
+    <br>
+            
+    {%endfor%}
           
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
