@@ -40,12 +40,12 @@
                     <hr>
                     <p> Cost: {{payment.cost}}</p>
                     <p> Category: {{payment.category}}</p>
-                    <hr>     
-                </div>
-                <form action="/removePayment/{{payment.id}}" method="post">
+                    <hr>                
+                    <form action="/removePayment/{{payment.id}}" method="post">
                     {% csrf_token %}
                     <input type="submit" value="Delete" class="btn btn-secondary btn-lg" style="background-color: #747C8C; width:fit-content; padding: 4px; margin:10px; font: 20px Montserrat, sans-serif;">
-                </form>
+                </form>     
+                </div>
         </div>
     </div>
     <br>
@@ -65,7 +65,11 @@
             </h5>
                     <hr>
                     <p> Amount: {{income.amount}}</p>
-                    <hr>     
+                    <hr> 
+                    <form action="/removeIncome/{{income.id}}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Delete" class="btn btn-secondary btn-lg" style="background-color: #747C8C; width:fit-content; padding: 4px; margin:10px; font: 20px Montserrat, sans-serif;">
+                    </form>    
                 </div>
         </div>
     </div>

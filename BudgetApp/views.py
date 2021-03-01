@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.db.models import Case, When, Value, CharField
-import calendar
+#import calendar
 import numpy as np
 from .models import Payment, Income
 from .forms import PaymentForm, IncomeForm
@@ -56,6 +56,12 @@ def addIncome(request):
 def removePayment(request, payment_id):
     paymenttodelete = Payment.objects.get(id=payment_id)
     paymenttodelete.delete()
+    return redirect('/')
+
+
+def removeIncome(request, income_id):
+    incometodelete = Income.objects.get(id=income_id)
+    incometodelete.delete()
     return redirect('/')
 
 

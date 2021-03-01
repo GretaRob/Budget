@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from BudgetApp.views import home, addPayments, addIncome, removePayment, pie_plot
+from BudgetApp.views import home, addPayments, addIncome, removePayment, removeIncome, pie_plot
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,5 +23,6 @@ urlpatterns = [
     path('addPayments/', addPayments, name='addPayments'),
     path('addIncome/', addIncome, name='addIncome'),
     path('removePayment/<int:payment_id>', removePayment, name='removePayment'),
+    path('removeIncome/<int:income_id>', removeIncome, name='removeIncome'),
     path('pie_plot/', pie_plot, name='pie_plot'),
 ]
