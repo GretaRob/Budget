@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Payment, Income
 from .forms import PaymentForm, IncomeForm
+from django.db.models import Sum
 
 
 def home(request):
@@ -14,8 +15,12 @@ def home(request):
     for i in allincome:
         listofincome.append(i)
 
+    totalpayments = Payment.objects.all().aggregate(tpayments=Sum('cost'))
+    totalincome = Income.objects.all().aggregate(tincome=Sum('amount'))
+    leftmoney = totalincome['tincome'] - totalpayments['tpayments']
+
     context = {'payments': payments, 'listofpayments': listofpayments,
-               'allincome': allincome, 'listofincome': listofincome, }
+               'allincome': allincome, 'listofincome': listofincome, 'totalpayments': totalpayments, 'totalincome': totalincome, 'leftmoney': leftmoney}
     return render(request, 'BudgetApp/home.html', context)
 
 
