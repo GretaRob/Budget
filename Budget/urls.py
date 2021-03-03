@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from BudgetApp.views import home, addPayments, addIncome, removePayment, removeIncome, pie_plot
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +28,4 @@ urlpatterns = [
     path('removePayment/<int:payment_id>', removePayment, name='removePayment'),
     path('removeIncome/<int:income_id>', removeIncome, name='removeIncome'),
     path('pie_plot/', pie_plot, name='pie_plot'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
