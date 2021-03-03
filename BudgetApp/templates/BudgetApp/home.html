@@ -7,7 +7,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'BudgetApp/styles.css' %}">
     <title>Budget App</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
     <style>
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 550px}
@@ -25,19 +26,18 @@
         <div class="col block">
             <div class="well">
                 <div class='block1'>
-                <h3>Hi!</h3>
-                <h5>Welcome to the Budget App.</h5>
+                <p>Budget App</p>
                 </div>
             </div>
-            <div class="row lists">
-                <div class="col">
+            <div class="row">
+                <div class="col balance">
                     <div class="well">
-                        <h2 class="jumbotron">
-                        Balance: {{leftmoney}} 
-                        </h2>
+                        <h2>Balance: {{leftmoney}}  €</h2>
+                        <h4>Total Income: {{totalincome}} €</h4>
+                        <h4>Total Expenses: {{totalpayments}} €</h4>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col picture">
                     <div class="well">
                        <img src="/pie_plot/" height="250px"/> 
                     </div>
@@ -45,67 +45,70 @@
             </div>       
             <div class="row">
                 <div class="col">
-                    <div class="well">
-
-                        <form method="POST" action="{% url 'addPayments' %}">
-                            {% csrf_token %}
-                            <button class="btn btn-success" style="width:fit-content; padding: 4px; margin:10px;">Add Expense</button>
-                        </form> 
-
-                        {%for payment in payments %}
-                             
-                        <div >
-                            <h5 class="card-title">
-                                <a href='{{payment.link}}'><h3>{{payment.payment_name}}</h3></a> 
-                            </h5>        
-                            <div >
-                                <p>{{payment.date_added|date:"d M Y"}}</p>
-                                <hr>
-                                <p> Cost: {{payment.cost}}</p>
-                                <p> Category: {{payment.category}}</p>
-                                <hr>                
+                    
+                    <h5><img class='icon' src="{% static 'BudgetApp/expense.png' %}"> Your Expenses</h5>
+                    <form method="POST" action="{% url 'addPayments' %}">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-secondary add" style="width:fit-content; padding: 4px; margin:10px;">Add</button>
+                    </form> 
+                    {%for payment in payments %}
+                    <div class="well">    
+                        <div class="payment">
+                            <div class="delete-form">
                                 <form action="/removePayment/{{payment.id}}" method="post">
                                     {% csrf_token %}
-                                    <input type="submit" value="Delete" class="btn btn-secondary btn-lg" style="background-color: #747C8C; width:fit-content; padding: 4px; margin:10px; font: 20px Montserrat, sans-serif;">
-                                </form>     
+                                    <input type="submit" value="X" class="button btn-outline-secondary btn-sm">
+                                </form>   
                             </div>
+                            <h3>{{payment.category}} </h3>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col" >
+                                        <p>{{payment.payment_name}} <span class='date'>{{payment.date_added|date:"d M Y"}}</span></p>
+                                    </div>
+                                    <div id='cost'class="col" >
+                                        <p> {{payment.cost}} €</p>
+                                    </div>          
+                                </div>
+                            </div>      
                         </div>
-                                
-                        {%endfor%}
                     </div>
+                    {%endfor%}
                 </div>
-
                 <div class="col">
+                    
+                    <h5><img class='icon' src="{% static 'BudgetApp/income.png' %}"> Your Income</h5>
+                    <form method="POST" action="{% url 'addIncome' %}">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-secondary add" style="width:fit-content; padding: 4px; margin:10px;">Add</button>
+                    </form>
+                        {%for income in allincome %}
                     <div class="well">
-                        <form method="POST" action="{% url 'addIncome' %}">
-                            {% csrf_token %}
-                            <button class="btn btn-success" style="width:fit-content; padding: 4px; margin:10px;">Add Income</button>
-                        </form>
-
-                           {%for income in allincome %}
-                                
-                        <div>
-                            <h5 class="card-title">
-                                <a href='{{income.link}}'><h3>{{income.income_name}}</h3></a> 
-                            </h5>        
-                            <div >
-                                <p>{{income.date_added|date:"d M Y"}}</p>
-                                <hr>
-                                <p> Amount: {{income.amount}}</p>
-                                <hr> 
+                        <div class="payment">
+                            <div class="delete-form">
                                 <form action="/removeIncome/{{income.id}}" method="post">
                                     {% csrf_token %}
-                                    <input type="submit" value="Delete" class="btn btn-secondary btn-lg" style="background-color: #747C8C; width:fit-content; padding: 4px; margin:10px; font: 20px Montserrat, sans-serif;">
-                                </form>    
+                                    <input type="submit" value="X" class="button btn-outline-secondary btn-sm">
+                                </form>   
                             </div>
-                        </div>
+                            <h3>{{income.category}} </h3>         
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <p>{{income.income_name}} <span class='date'>{{income.date_added|date:"d M Y"}}</span></p>
+                                    </div>
+                                    <div id='amount' class="col">
+                                        <p> {{income.amount}} €</p>
+                                    </div>          
+                                </div>  
+                            </div>
+                        </div>  
                                 
-                         {%endfor%}  
+                         
                     </div>
+                    {%endfor%}  
                 </div>
-            </div> 
-              
-                       
+            </div>            
         </div>
     </div>
 

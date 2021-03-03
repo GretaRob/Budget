@@ -1,3 +1,81 @@
-.block {
-  background-color: grey;
+.container-fluid {
+  background: #bbbcc0;
+  color: #0e1635;
+  font-family: Helvetica, sans-serif;
+}
+
+.balance {
+  background: #0e1635;
+  color: white;
+  top: 50%;
+  border-radius: 5px;
+  margin: 5px;
+  padding-top: 30px;
+}
+
+.block1 {
+  color: #0e1635;
+  text-align: center;
+  padding: 30px;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.date {
+  font-size: 10px;
+}
+
+.payment {
+  background: white;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+}
+
+.delete-form {
+  position: relative;
+}
+
+.button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #747c8c;
+  width: fit-content;
+  border: #bbbc;
+}
+
+#cost {
+  font-size: 30px;
+  color: red;
+}
+
+#amount {
+  font-size: 30px;
+  color: green;
+}
+
+.picture {
+  background: white;
+  text-align: center;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.img {
+  align-self: center;
+}
+
+.add {
+  position: absolute;
+  top: 0;
+  right: 5%;
+}
+
+h5 {
+  padding: 20px;
+}
+
+.icon {
+  height: 30px;
 }

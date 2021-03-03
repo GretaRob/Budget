@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.db.models import Case, When, Value, CharField
-#import calendar
 import numpy as np
 from .models import Payment, Income
 from .forms import PaymentForm, IncomeForm
@@ -22,9 +21,12 @@ def home(request):
     for i in allincome:
         listofincome.append(i)
 
-    totalpayments = Payment.objects.all().aggregate(tpayments=Sum('cost'))
-    totalincome = Income.objects.all().aggregate(tincome=Sum('amount'))
-    leftmoney = totalincome['tincome'] - totalpayments['tpayments']
+    totalpay = Payment.objects.aggregate(tpayments=Sum('cost'))
+    totalinc = Income.objects.aggregate(tincome=Sum('amount'))
+    totalpayments = round(totalpay['tpayments'], 2)
+    totalincome = round(totalinc['tincome'], 2)
+    leftmoney = totalincome - totalpayments
+    leftmoney = round(leftmoney, 2)
 
     context = {'payments': payments, 'listofpayments': listofpayments,
                'allincome': allincome, 'listofincome': listofincome, 'totalpayments': totalpayments, 'totalincome': totalincome, 'leftmoney': leftmoney}
@@ -69,8 +71,6 @@ def pie_plot(request):
 
     # a donut plot showing the spendings per month
 
-    #month_name = calendar.month_name[month]
-
     # creating the figure to plot the graph
     fig = Figure()
     # equal aspect ratio ensures that pie is drawn as a circle.
@@ -98,7 +98,7 @@ def pie_plot(request):
            colors=['#ff6666', '#ffcc99', '#99ff99',
                    'grey', '#c2c2f0', '#66b3ff', '#ffb3e6'],
            startangle=90,
-           shadow=False,
+           shadow=True,
            autopct=my_autopct,
            pctdistance=0.55)
     ax.legend(wedges, labels=labels, title='Categories',
