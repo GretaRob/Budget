@@ -77,7 +77,7 @@ def pie_plot(request):
     ax = fig.add_subplot(111, aspect='equal')
 
     wedges = [Payment.objects.filter(category='rent').aggregate(suma=Sum('cost'))['suma'] or 0.00,
-              Payment.objects.filter(category='grocery').aggregate(
+              Payment.objects.filter(category='groceries').aggregate(
                   suma=Sum('cost'))['suma'] or 0.00,
               Payment.objects.filter(category='shopping').aggregate(
                   suma=Sum('cost'))['suma'] or 0.00,
@@ -89,8 +89,8 @@ def pie_plot(request):
                   suma=Sum('cost'))['suma'] or 0.00,
               Payment.objects.filter(category='other').aggregate(suma=Sum('cost'))['suma'] or 0.00]
 
-    labels = ['rent', 'groceries', 'shopping',
-              'gym', 'phone', 'freetime', 'other']
+    labels = ['Rent', 'Groceries', 'Shopping',
+              'Gym', 'Phone', 'Freetime', 'Other']
 
     def my_autopct(pct):
         return ('%1.1f%%' % pct) if pct > 0.0 else ''

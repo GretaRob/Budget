@@ -19,7 +19,7 @@ class Payment(models.Model):
     date_added = models.DateTimeField()
     cost = models.FloatField()
     category = models.CharField(
-        max_length=25, choices=CHOICES, default='other')
+        max_length=25, choices=CHOICES, default='Other')
 
     def __str__(self):
         return str(self.payment_name)

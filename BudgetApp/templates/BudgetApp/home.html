@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col balance">
                     <div class="well">
-                        <h2>Balance: {{leftmoney}}  €</h2>
+                        <h2 class="w3-bottombar w3-border-orange">Balance: {{leftmoney}}  €</h2>
                         <h4>Total Income: {{totalincome}} €</h4>
                         <h4>Total Expenses: {{totalpayments}} €</h4>
                     </div>
@@ -60,14 +60,14 @@
                                     <input type="submit" value="X" class="button btn-outline-secondary btn-sm">
                                 </form>   
                             </div>
-                            <h3>{{payment.category}} </h3>
+                            <h3>{{payment.category|title }} </h3>
                             <div class="container">
                                 <div class="row">
                                     <div class="col" >
-                                        <p>{{payment.payment_name}} <span class='date'>{{payment.date_added|date:"d M Y"}}</span></p>
+                                        <p><img class='icon2' src="{% static 'BudgetApp/note.png' %}"> {{payment.payment_name}} <span class='date'>{{payment.date_added|date:"d M Y"}}</span></p>
                                     </div>
                                     <div id='cost'class="col" >
-                                        <p> {{payment.cost}} €</p>
+                                        <p> {{payment.cost|floatformat:"2"}} €</p>
                                     </div>          
                                 </div>
                             </div>      
@@ -95,10 +95,10 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
-                                        <p>{{income.income_name}} <span class='date'>{{income.date_added|date:"d M Y"}}</span></p>
+                                        <p><img class='icon2' src="{% static 'BudgetApp/note.png' %}"> {{income.income_name}} <span class='date'>{{income.date_added|date:"d M Y"}}</span></p>
                                     </div>
                                     <div id='amount' class="col">
-                                        <p> {{income.amount}} €</p>
+                                        <p> {{income.amount|floatformat:"2"}} €</p>
                                     </div>          
                                 </div>  
                             </div>

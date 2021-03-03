@@ -23,6 +23,7 @@
 
 .date {
   font-size: 10px;
+  opacity: 0.5;
 }
 
 .payment {
@@ -72,10 +73,35 @@
   right: 5%;
 }
 
+h4 {
+  color: #747c8c;
+  opacity: 0.5;
+}
+
 h5 {
   padding: 20px;
 }
 
 .icon {
   height: 30px;
+}
+
+.icon2 {
+  height: 20px;
+}
+
+/* expense and income forms*/
+
+.form {
+  background: #bbbcc0;
+  color: #0e1635;
+  font-family: Helvetica, sans-serif;
+}
+
+.form1 {
+  border-radius: 5px;
+  background: white;
+  margin: 80px auto;
+  padding: 40px;
+  width: fit-content;
 }
