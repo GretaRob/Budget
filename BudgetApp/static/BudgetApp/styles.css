@@ -1,8 +1,12 @@
+/* background */
+
 .container-fluid {
-  background: #bbbcc0;
+  background: #e0eaee;
   color: #0e1635;
   font-family: Helvetica, sans-serif;
 }
+
+/* balance box*/
 
 .balance {
   background: #0e1635;
@@ -20,6 +24,26 @@
   font-size: 50px;
   font-weight: bold;
 }
+
+h4 {
+  color: #e0eaee;
+  opacity: 0.5;
+}
+
+/* pie chart*/
+
+.picture {
+  background: white;
+  text-align: center;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.img {
+  align-self: center;
+}
+
+/* expenses and income */
 
 .date {
   font-size: 10px;
@@ -56,26 +80,10 @@
   color: green;
 }
 
-.picture {
-  background: white;
-  text-align: center;
-  border-radius: 5px;
-  margin: 5px;
-}
-
-.img {
-  align-self: center;
-}
-
 .add {
   position: absolute;
   top: 0;
   right: 5%;
-}
-
-h4 {
-  color: #747c8c;
-  opacity: 0.5;
 }
 
 h5 {
@@ -93,7 +101,7 @@ h5 {
 /* expense and income forms*/
 
 .form {
-  background: #bbbcc0;
+  background: #e0eaee;
   color: #0e1635;
   font-family: Helvetica, sans-serif;
 }
