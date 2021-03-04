@@ -32,9 +32,9 @@
             <div class="row">
                 <div class="col balance">
                     <div class="well">
-                        <h2 class="w3-bottombar w3-border-orange">Balance: {{leftmoney}}  €</h2>
-                        <h4>Total Income: {{totalincome}} €</h4>
-                        <h4>Total Expenses: {{totalpayments}} €</h4>
+                        <h2 class="w3-bottombar w3-border-orange">Balance: {{leftmoney|floatformat:"2"}}  €</h2>
+                        <h4>Total Income: {{totalincome|floatformat:"2"}} €</h4>
+                        <h4>Total Expenses: {{totalpayments|floatformat:"2"}} €</h4>
                     </div>
                 </div>
                 <div class="col picture">
