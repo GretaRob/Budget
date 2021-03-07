@@ -21,8 +21,8 @@ def home(request):
     for i in allincome:
         listofincome.append(i)
 
-    totalpay = Payment.objects.aggregate(tpayments=Sum('cost'))
-    totalinc = Income.objects.aggregate(tincome=Sum('amount'))
+    totalpay = Payment.objects.aggregate(tpayments=Sum('cost')) or 0.00
+    totalinc = Income.objects.aggregate(tincome=Sum('amount')) or 0.00
     totalpayments = totalpay['tpayments']
     totalincome = totalinc['tincome']
     leftmoney = totalincome - totalpayments
