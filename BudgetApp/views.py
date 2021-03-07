@@ -23,10 +23,9 @@ def home(request):
 
     totalpay = Payment.objects.aggregate(tpayments=Sum('cost'))
     totalinc = Income.objects.aggregate(tincome=Sum('amount'))
-    totalpayments = round(totalpay['tpayments'], 2)
-    totalincome = round(totalinc['tincome'], 2)
+    totalpayments = totalpay['tpayments']
+    totalincome = totalinc['tincome']
     leftmoney = totalincome - totalpayments
-    leftmoney = round(leftmoney, 2)
 
     context = {'payments': payments, 'listofpayments': listofpayments,
                'allincome': allincome, 'listofincome': listofincome, 'totalpayments': totalpayments, 'totalincome': totalincome, 'leftmoney': leftmoney}
