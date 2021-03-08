@@ -21,12 +21,11 @@ def home(request):
     for i in allincome:
         listofincome.append(i)
 
-    totalpay = Payment.objects.aggregate(
+    totalpayments = Payment.objects.aggregate(
         tpayments=Sum('cost'))['tpayments'] or 0.00
-    totalinc = Income.objects.aggregate(
+    totalincome = Income.objects.aggregate(
         tincome=Sum('amount'))['tincome'] or 0.00
-    totalpayments = totalpay['tpayments']
-    totalincome = totalinc['tincome']
+
     leftmoney = totalincome - totalpayments
 
     context = {'payments': payments, 'listofpayments': listofpayments,
