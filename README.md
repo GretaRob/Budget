@@ -2,7 +2,7 @@
 
 ## Project Description
 
-An application to calculate your budget based on the list of expenses and income. A user can add expenses within provided categories. It automatically computes balance, total income and total expenses. The pie chart made with Matplotlib presents user spendding statitistics based on categories. It is deployed on Heroku.
+An application that helps you budget based on your expenses and income. A user can add expenses within provided categories. It automatically computes your balance, total income and total expenses. The app is writtten in Python Django framework and styled with Bootstrap. The pie chart made with Matplotlib presents user spending statitistics based on categories. It is deployed on Heroku.
 
 *****
 
