@@ -25,8 +25,8 @@ def home(request):
         tpayments=Sum('cost')).get('cost__sum') or 0.00
     totalinc = Income.objects.aggregate(
         tincome=Sum('amount')).get('amount__sum') or 0.00
-    totalpayments = int(totalpay['tpayments'])
-    totalincome = int(totalinc['tincome'])
+    totalpayments = totalpay['cost__sum']
+    totalincome = totalinc['amount__sum']
     leftmoney = totalincome - totalpayments
 
     context = {'payments': payments, 'listofpayments': listofpayments,
