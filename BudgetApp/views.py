@@ -22,9 +22,13 @@ def home(request):
         listofincome.append(i)
 
     totalpay = Payment.objects.aggregate(
-        tpayments=Sum('cost')).get('cost__sum') or 0.00
+        tpayments=Sum('cost')).get('cost__sum')
+    if totalpay['tpayments'] == None:
+        totalpay['tpayments'] == 0
     totalinc = Income.objects.aggregate(
-        tincome=Sum('amount')).get('amount__sum') or 0.00
+        tincome=Sum('amount')).get('amount__sum')
+    if totalinc['tincome'] == None:
+        totalinc['ticnome'] == 0
     totalpayments = totalpay['tpayments']
     totalincome = totalinc['tincome']
     leftmoney = totalincome - totalpayments
